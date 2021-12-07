@@ -1,28 +1,31 @@
 def solve():
     report = open("day3.txt", "r")
 
-    i = 12
-    gr = "000000000000"
+    i = 0
+    gr = ""
+    er = ""
     zeroes = 0
     ones = 0
-    while (i > 0):
-        temp = report.readline()
-        if temp == "":
-            i -= 1
-            if zeroes > ones:
-                gr += "0"
-            elif ones > zeroes:
-                gr += "1"
-            zeroes = 0
-            ones = 0
-        else:
-            if temp[12-i] == "0":
-                zeroes += 1
-            elif temp[12-i] == "1":
-                ones += 1
-
+    data = report.readlines()
+    print(data[0])
+    while (i < 12):
+        for j in range(len(data)):
+            if data[j][i] == "0":
+                zeroes+=1
+            elif data[j][i] == "1":
+                ones+=1
+        if zeroes > ones:
+            gr += "0"
+            er += "1"
+        elif zeroes < ones:
+            gr += "1"
+            er += "0"
+        zeroes = 0
+        ones = 0
+        i+=1
     print(gr)
-    print(int(gr, 2) * ((int(gr, 2) << 12) - 1 - 12))
+    print(er)
+    print(int(gr, 2) * int(er, 2))
     report.close()
 
 
